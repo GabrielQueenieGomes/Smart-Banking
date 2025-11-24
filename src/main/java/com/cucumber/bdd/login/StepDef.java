@@ -21,7 +21,7 @@ public class StepDef {
 
 	@Given("go to app link")
 	public void go_to_app_link() {
-		driver.get("file:///C:/Users/Queenie/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/TempState/59F72FD83D81659D5E3F6F9B8D0AB19A/qa_online%20Banking%20monthly_yearly%20statement%20-bug%20fixed.html");
+		driver.get("file:///C:/Users/Queenie/Documents/qa_online%20Banking%20monthly_yearly%20statement%20-bug%20fixed.html");
 	}
 
 	@When("enter valid username")
