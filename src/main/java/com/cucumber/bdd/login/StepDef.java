@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.account.info.AccountPage;
+import com.cucumber.bdd.login.Login_Page;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +15,7 @@ public class StepDef implements Login {
 	// shortcut import = ctrl + shift + O
 	
 	WebDriver driver;
+	Login_Page page = new Login_Page();
 	
 	@Override
 	@Given("open chrome")
@@ -25,65 +27,71 @@ public class StepDef implements Login {
 	@Override
 	@Given("go to app link")
 	public void goToAppLink() {
-		driver.get("file:///C:/Users/Queenie/Documents/qa_online%20Banking%20monthly_yearly%20statement%20-bug%20fixed.html");
+		driver.get(page.getAppURL());
 	}
 
 	@Override
 	@When("enter valid username")
 	public void enterValidUsername() {
-		driver.findElement(By.xpath("//*[@id='username']")).sendKeys("Batch44");
+		driver.findElement(By.xpath(page.getUserLoct()))
+        .sendKeys(page.getUserValue());
 	}
 
 	@Override
 	@When("enter valid password")
 	public void enterValidPassword() {
-		driver.findElement(By.xpath("//*[@id='password']")).sendKeys("student123@");
+		driver.findElement(By.xpath(page.getPassLoct()))
+        .sendKeys(page.getPassValue());
 	}
 
 	@Override
 	@When("click login button")
 	public void clickLoginButton() {
-		driver.findElement(By.xpath("//*[@value='Login']")).click();
+		driver.findElement(By.xpath(page.getLoginLoct())).click();
 	}
 
 	@Override
 	@Then("login should pass and there should be logout button visible")
 	public void loginShouldPass() {
-		Boolean status = driver.findElement(By.xpath("//*[@id='logoutButton']")).isDisplayed();
-		System.out.println("Log out button there or not = " + status);
+		boolean status =
+                driver.findElement(By.xpath(page.getLogoutLoct())).isDisplayed();
 
+        System.out.println("Log out button visible = " + status);
 	}
 
 	@Override
 	@Then("user views bank account information")
 	public void user_views_bank_account_information() {
-	    AccountPage account = new AccountPage(driver);
+		AccountPage account = new AccountPage(driver);
+        account.goToAccountPage();
+        account.getAccountTableData();
 
-	    account.goToAccountPage();
-	    account.getAccountTableData();
+        driver.quit();
 	}
 	
 	@Override
 	@When("enter invalid username")
 	public void enterInvalidUsername() {
-		driver.findElement(By.xpath("//*[@id='username']")).sendKeys("sarower");
+		driver.findElement(By.xpath(page.getUserLoct()))
+        .sendKeys("wrongUser");
 	}
 
 	@Override
 	@When("enter invalid password")
 	public void enterInvalidPassword() {
-		driver.findElement(By.xpath("//*[@id='password']")).sendKeys("sarower21312@");
+		driver.findElement(By.xpath(page.getPassLoct()))
+        .sendKeys("wrongPass123");
 	}
 
 	@Override
 	@Then("login fails and no logout button")
 	public void loginShouldFail() {
 		try {
-			Boolean status = driver.findElement(By.xpath("//*[@id='logoutButton']")).isDisplayed();
-			System.out.println("Log out button there or not = " + status);
-		} catch (Exception e) {
-			
-		}
-	    driver.quit();
+            driver.findElement(By.xpath(page.getLogoutLoct())).isDisplayed();
+            System.out.println("Logout shown (unexpected).");
+        } catch (Exception e) {
+            System.out.println("Logout NOT shown (login failed as expected).");
+        }
+        driver.quit();
 	}
 }
