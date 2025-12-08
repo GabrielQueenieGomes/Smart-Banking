@@ -30,9 +30,7 @@ public class Login_Page implements Login {
     public void loginShouldPass() {}
     
     @Override
-    public void user_views_bank_account_information() {
-    	
-    }
+    public void user_views_bank_account_information() {}
 
     @Override
     public void loginShouldFail() {}
