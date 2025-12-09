@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.page.object.model.PageObjectModel;
+
 public class AccountPage implements Account {
 	WebDriver driver;
 
@@ -14,6 +16,8 @@ public class AccountPage implements Account {
 
     @Override
     public void goToAccountPage() {
+    	PageObjectModel pom = new PageObjectModel();
+    	driver.findElement(By.xpath(pom.getAppURL())).click();
         // Example locator: update as needed
         driver.findElement(By.xpath("//*[text()='Account']")).click();
     }
