@@ -27,7 +27,7 @@ public class StepDef implements Login {
 	@Override
 	@Given("go to app link")
 	public void goToAppLink() {
-		driver.get(page.getAppURL());
+		driver.findElement(By.xpath(page.getAppURL())).click();
 	}
 
 	@Override
