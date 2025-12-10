@@ -1,10 +1,8 @@
 package com.test.run;
 
-import org.junit.runner.RunWith;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "./src/main/resources/Login.feature",
         glue = {"com.cucumber.bdd.login", "com.account.info"}, 
@@ -14,9 +12,9 @@ import io.cucumber.junit.CucumberOptions;
                 "json:target/cucumber.json"
         },
         monochrome = true,
-        tags = "@Regression"
+        tags = "@Positive and @Negative"
 )
 
-public class TestRun {
+public class TestRun extends AbstractTestNGCucumberTests {
 
 }

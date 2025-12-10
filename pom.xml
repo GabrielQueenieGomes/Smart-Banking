@@ -7,6 +7,13 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <dependencies>
+  
+  <dependency>
+    <groupId>com.microsoft.playwright</groupId>
+    <artifactId>playwright</artifactId>
+    <version>1.56.0</version>
+</dependency>
+
   <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
@@ -78,7 +85,7 @@
 							<outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
 							<inputDirectory>${project.build.directory}</inputDirectory>
 							<jsonFiles>
-								<param>**/*.json</param>
+								<param>/*.json</param>
 							</jsonFiles>
 						</configuration>
 					</execution>

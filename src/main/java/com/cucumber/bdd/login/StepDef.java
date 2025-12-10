@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.account.info.AccountPage;
-import com.cucumber.bdd.login.Login_Page;
+import com.page.object.model.PageObjectModel;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,11 +15,12 @@ public class StepDef implements Login {
 	// shortcut import = ctrl + shift + O
 	
 	WebDriver driver;
-	Login_Page page = new Login_Page();
+	PageObjectModel page;
 	
 	@Override
 	@Given("open chrome")
 	public void openChrome() {
+		page = new PageObjectModel();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 	}
@@ -40,7 +41,7 @@ public class StepDef implements Login {
 	@Override
 	@When("enter valid password")
 	public void enterValidPassword() {
-		driver.findElement(By.xpath(page.getPassLoct()))
+		driver.findElement(By.id(page.getPassLoct()))
         .sendKeys(page.getPassValue());
 	}
 
@@ -54,7 +55,7 @@ public class StepDef implements Login {
 	@Then("login should pass and there should be logout button visible")
 	public void loginShouldPass() {
 		boolean status =
-                driver.findElement(By.xpath(page.getLogoutLoct())).isDisplayed();
+                driver.findElement(By.id(page.getLogoutLoct())).isDisplayed();
 
         System.out.println("Log out button visible = " + status);
 	}
@@ -73,14 +74,14 @@ public class StepDef implements Login {
 	@When("enter invalid username")
 	public void enterInvalidUsername() {
 		driver.findElement(By.xpath(page.getUserLoct()))
-        .sendKeys("wrongUser");
+        .sendKeys(page.getWrongUser());
 	}
 
 	@Override
 	@When("enter invalid password")
 	public void enterInvalidPassword() {
 		driver.findElement(By.xpath(page.getPassLoct()))
-        .sendKeys("wrongPass123");
+        .sendKeys(page.getWrongPass());
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.page.object.model.PageObjectModel;
 
 public class AccountPage implements Account {
 	WebDriver driver;
+	PageObjectModel pom = new PageObjectModel();
 
     public AccountPage(WebDriver driver) {
         this.driver = driver;
@@ -16,17 +17,17 @@ public class AccountPage implements Account {
 
     @Override
     public void goToAccountPage() {
-    	PageObjectModel pom = new PageObjectModel();
+    	
     	driver.findElement(By.xpath(pom.getAppURL())).click();
         // Example locator: update as needed
-        driver.findElement(By.xpath("//*[text()='Account']")).click();
+        driver.findElement(By.xpath(pom.getAccountXpath())).click();
     }
 
     @Override
     public void getAccountTableData() {
 
-        List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
-        List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr[1]/td"));
+        List<WebElement> rows = driver.findElements(By.xpath(pom.getTableRow()));
+        List<WebElement> columns = driver.findElements(By.xpath(pom.getTableColumn()));
 
         System.out.println("Row count = " + rows.size());
         System.out.println("Column count = " + columns.size());
@@ -42,19 +43,19 @@ public class AccountPage implements Account {
 
     @Override
     public void printRowCount() {
-        List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+        List<WebElement> rows = driver.findElements(By.xpath(pom.getTableRow()));
         System.out.println("Row count = " + rows.size());
     }
 
     @Override
     public void printColumnCount() {
-        List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr[1]/td"));
+        List<WebElement> columns = driver.findElements(By.xpath(pom.getTableColumn()));
         System.out.println("Column count = " + columns.size());
     }
 
     @Override
     public void printFirstCellValue() {
-        WebElement firstCell = driver.findElement(By.xpath("//table/tbody/tr[1]/td[1]"));
+        WebElement firstCell = driver.findElement(By.xpath(pom.getTableCell()));
         System.out.println("First cell value = " + firstCell.getText());
     }
 }
