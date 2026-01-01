@@ -47,6 +47,11 @@
     <version>7.11.0</version>
     <scope>test</scope>
 </dependency>
+  	<dependency>
+  		<groupId>ElephantFamily</groupId>
+  		<artifactId>Guru99</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
   
 <build>
