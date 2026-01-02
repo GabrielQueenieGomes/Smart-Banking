@@ -15,9 +15,11 @@ public class StoreProduct {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-		driver.navigate().to("https://www.demoblaze.com/");
 		
-		List<WebElement> productName = driver.findElements(By.xpath("//*[@class='card-block']//h4"));
+		PageObjectModel pom = new PageObjectModel();
+		driver.navigate().to(pom.getAppLink());
+		
+		List<WebElement> productName = driver.findElements(By.xpath(pom.getProductName()));
 		System.out.println("Product count = " + productName.size());
 		System.out.println("2nd Product = " + productName.get(1).getText());
 		
@@ -26,7 +28,7 @@ public class StoreProduct {
 		}
 		
 		List<Integer> allPrices = new ArrayList<>();
-		List<WebElement> productPrice = driver.findElements(By.xpath("//*[@class='card-block']//h5"));
+		List<WebElement> productPrice = driver.findElements(By.xpath(pom.getProductPrice()));
 		System.out.println("Price count = " + productPrice.size());
 		System.out.println("2nd Price = " + productPrice.get(1).getText());
 		
