@@ -9,15 +9,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StoreProduct {
 	public void getProduct() {
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-		
-		PageObjectModel pom = new PageObjectModel();
-		driver.navigate().to(pom.getAppLink());
+		WebDriverManager.chromedriver().setup();
+
+	    ChromeOptions options = new ChromeOptions();
+	    options.addArguments("--headless=new");
+	    options.addArguments("--no-sandbox");
+	    options.addArguments("--disable-dev-shm-usage");
+
+	    WebDriver driver = new ChromeDriver(options);
+
+	    driver.manage().window().maximize();
+	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
+	    PageObjectModel pom = new PageObjectModel();
+	    driver.navigate().to(pom.getAppLink());
 		
 		List<WebElement> productName = driver.findElements(By.xpath(pom.getProductName()));
 		System.out.println("Product count = " + productName.size());
