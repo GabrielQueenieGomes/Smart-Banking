@@ -17,10 +17,14 @@ public class StoreProduct {
 	public void getProduct() {
 		WebDriverManager.chromedriver().setup();
 
-	    ChromeOptions options = new ChromeOptions();
-	    options.addArguments("--headless=new");
-	    options.addArguments("--no-sandbox");
-	    options.addArguments("--disable-dev-shm-usage");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+		options.addArguments("--disable-gpu");
+		options.addArguments("--window-size=1920,1080");
+		options.addArguments("--disable-extensions");
+		options.addArguments("--remote-allow-origins=*");
+		options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
+
 
 	    WebDriver driver = new ChromeDriver(options);
 
